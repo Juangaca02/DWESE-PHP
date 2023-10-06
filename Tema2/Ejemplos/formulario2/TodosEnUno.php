@@ -4,43 +4,49 @@
         <title>title</title>
     </head>
     <body>
-        <form action="Matricula.php" method="POST">
-            Nombre: <input type="text" name="nombre"><br>
-            Apellidos: <input type="text" name="apell"><br>
-            <input type="submit" name="Siguiente" value="Siguiente">
+        <?php
+        if (!isset($_POST['Siguiente']) && !isset($_POST['Enviar'])) {
+            ?> 
+            <form action="" method="POST">
+                Nombre: <input type="text" name="nombre" value="<?php if (isset($_POST['cambiar'])) echo $_POST["nombre"] ?>"><br>
+                Apellidos: <input type="text" name="apell" value="<?php if (isset($_POST['cambiar'])) echo $_POST["apell"] ?>"><br>
+                <input type="submit" name="Siguiente" value="Siguiente">
+            </form>
             <?php
-            if (isset($_POST['Siguiente'])) {
-                ?>  
-                <form action="datos.php" method="POST">
-                    <input type="hidden" name="nombre" value="<?php echo $_POST["nombre"] ?>">
-                    <input type="hidden" name="apell" value="<?php echo $_POST["apell"] ?>">
-                    Nº matricula: <input type="text" name="matricula"><br>
-                    <label>Selecciona un curso:</label>
-                    <select name="curso">
-                        <option value="1/ESO">1/ESO</option>
-                        <option value="2/ESO">2/ESO</option>
-                        <option value="3/ESO">3/ESO</option>
-                        <option value="4/ESO">4/ESO</option>
-                        <option value="1/DAW">1DAW</option>
-                        <option value="2/DAW">2/DAW</option>
-                    </select><br>
-                    Precio: <input type="text" name="precio"><br>
-                    <input type="submit" name="Enviar" value="Enviar">
-                </form>
-                <?php
-            }
-            ?>
+        }
+        if (isset($_POST['Siguiente'])) {
+            ?>  
+            <form action="" method="POST">
+                <input type="hidden" name="nombre" value="<?php echo $_POST["nombre"] ?>">
+                <input type="hidden" name="apell" value="<?php echo $_POST["apell"] ?>">
+                Direccion: <input type="text" name="direccion" value="<?php if (isset($_POST['direccion'])) echo $_POST["direccion"] ?>"><br>
+                Nº Telefono: <input type="text" name="telefono" value="<?php if (isset($_POST['telefono'])) echo $_POST["telefono"] ?>"><br>
+                <input type="submit" name="Enviar" value="Enviar">
+            </form>
             <?php
-            if (isset($_POST['Enviar'])) {
-                echo "<br>Nombre: " . $_POST["nombre"];
-                echo "<br>Apellidos: " . $_POST["apell"];
-                echo "<br>Nº Matricula: " . $_POST["matricula"];
-                echo "<br>Curso: " . $_POST["curso"];
-                echo "<br>Precio: " . $_POST["precio"];
-                echo '<br><a href="index.php">Atras</a>';
-            }
+        }
+        ?>
+        <?php
+        if (isset($_POST['Enviar'])) {
+            echo "Nombre: " . $_POST["nombre"];
+            echo "<br>Apellidos: " . $_POST["apell"];
+            echo "<br>Direccion: " . $_POST["direccion"];
+            echo "<br>Nº Telefono: " . $_POST["telefono"];
             ?>
-        </form>
+            <form action = "index.php" method="POST">
+                <input type = "submit" name = "cambiar" value = "Cambiar">
+                <input type="hidden" name="nombre" value="<?php echo $_POST["nombre"] ?>">
+                <input type="hidden" name="apell" value="<?php echo $_POST["apell"] ?>">
+                <input type="hidden" name="direccion" value="<?php echo $_POST["direccion"] ?>">
+                <input type="hidden" name="telefono" value="<?php echo $_POST["telefono"] ?>">
+            </form>
+            <form action = "index.php" method="POST">
+                <input type = "submit" name = "enviar" value = "Enviar">
+            </form>
+            <?php
+        }
+        ?>
+
     </body>
 </html>
 
