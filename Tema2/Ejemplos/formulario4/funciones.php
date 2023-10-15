@@ -15,12 +15,19 @@
         }
 
         function mostrarMatriz($matriz) {
-            foreach ($matriz as $fila) {
-                foreach ($fila as $valor) {
-                    echo $valor . " ";
+            ?>
+            <table border="1">
+                <?php
+                foreach ($matriz as $fila) {
+                    echo "<tr>";
+                    foreach ($fila as $valor) {
+                        echo "<td>" . $valor . "</td>";
+                    }
+                    echo "<tr>";
                 }
-                echo "<br>";
-            }
+                ?>
+            </table>
+            <?php
         }
 
         function sumaFilas($matriz) {
@@ -31,25 +38,32 @@
                 }
                 $sumaFilas[] = $sumaFilaActual;
             }
-            foreach ($sumaFilas as $ind => $values){
+            foreach ($sumaFilas as $ind => $values) {
                 echo "Suma de la fila $ind: $values<br>";
             }
         }
-        
-        function sumaDiagonal($matriz){
-            $sum = 0;
-            for ($i = 0; $i < count($array); $i++) {
-                for ($j = 0; $j < count($array); $j++) {
-                    if ($i == $j) {
-                        $sum += $matriz[$i][$j];
+
+        function sumaColumnas($matriz) {
+            
+        }
+
+        function sumaDiagonal($matriz) {
+            if (count($matriz) == count($matriz[0])) {
+                $sum = 0;
+                for ($i = 0; $i < count($matriz); $i++) {
+                    for ($j = 0; $j < count($matriz); $j++) {
+                        if ($i == $j) {
+                            $sum += $matriz[$i][$j];
+                        }
                     }
                 }
+                echo "La suma de la diagonas es: $sum<br>";
+            } else {
+                echo "La matriz no es cuadrada, por favor, inserte una matriz cuadrada;";
             }
-            return $sum;
         }
-        
-        
-        
         ?>
+
+
     </body>
 </html>

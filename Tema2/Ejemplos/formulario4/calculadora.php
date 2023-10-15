@@ -32,25 +32,29 @@
 
 
 
-
-
-        if (isset($_GET['sumaFilas']) && isset($_POST['Enviar1'])) {
+        if (isset($_POST['Enviar1'])) {
             $m = crearMatriz($_POST['filas'], $_POST['columnas']);
-            mostrarMatriz($m);
-            sumaFilas($m);
-            echo '<a href="index.php">Menu</a>';
-        }
-        if (isset($_GET['sumaColumnas'])) {
-            echo 'POPO2';
-        }
-        if (isset($_GET['sumaAmbas'])) {
-            echo 'POPO3';
-        }
-        if (isset($_GET['sumaDiagonal'])) {
-            echo 'POPO4';
-        }
-        if (isset($_GET['matriz'])) {
-            echo 'POPO5';
+            if (isset($_GET['sumaFilas']) && isset($_POST['Enviar1'])) {
+                mostrarMatriz($m);
+                sumaFilas($m);
+                echo '<a href="index.php">Menu</a>';
+            }
+            if (isset($_GET['sumaColumnas']) && isset($_POST['Enviar1'])) {
+                 mostrarMatriz($m);
+                 sumaColumnasl($m);
+                echo '<a href="index.php">Menu</a>';
+            }
+            if (isset($_GET['sumaAmbas']) && isset($_POST['Enviar1'])) {
+                echo 'POPO3';
+            }
+            if (isset($_GET['sumaDiagonal']) && isset($_POST['Enviar1'])) {
+                mostrarMatriz($m);
+                sumaDiagonal($m);
+                echo '<a href="index.php">Menu</a>';
+            }
+            if (isset($_GET['matriz'])) {
+                echo 'POPO5';
+            }
         }
         ?>
 
