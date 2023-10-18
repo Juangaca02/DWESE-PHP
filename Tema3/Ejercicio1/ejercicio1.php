@@ -18,11 +18,18 @@
                 color:#ff0000;
                 height:30px;
             }
-            
+
         </style>
 
     </head>
     <body>
+        <?php
+        try {
+            $conex = new mysqli('localhost', 'dwes', 'abc123.', 'dwes');
+        } catch (Exception $exc) {
+            die($exc->getTraceAsString());
+        }
+        ?>
         <div class="encabezado">
             <h1>Ejercicio: Conjunto de resultados de Mysqli </h1>
             <form action="" method="POST">
@@ -30,14 +37,14 @@
                 <select name="producto">
                     <?php
                     try {
-                        $conex = new mysqli('localhost', 'dwes', 'abc123.', 'dwes');
-                    } catch (Exception $exc) {
-                        die($exc->getTraceAsString());
-                    }
-                    try {
                         $result = $conex->query("SELECT * FROM producto;");
                         while ($fila = $result->fetch_object()) {
-                            echo "<option value='$fila->cod'>$fila->nombre_corto</option>";
+                            echo "<option value='$fila->cod'";
+
+                            if (isset($_POST['producto']) && $_POST['producto'] == $fila->cod) {
+                                echo " selected ";
+                            }
+                            echo ">$fila->nombre_corto</option>";
                         }
                     } catch (Exception $exc) {
                         echo $exc->getTraceAsString();
@@ -53,10 +60,10 @@
             if (isset($_POST['Mostrar'])) {
 
                 try {
-                    $result = $conex->query("select t.nombre, s.unidades from tienda t, stock s where t.cod = s.tienda and s.producto='$_POST[producto]';");
-                    //echo $result->num_rows;
-                    while ($fila = $result->fetch_object()) {
-                        echo "Tienda: $fila->nombre : $fila->unidades unidades <br>";
+                    $resultado = $conex->query("select t.nombre, s.unidades from tienda t, stock s where t.cod = s.tienda and s.producto='$_POST[producto]';");
+                    //echo $resultado->num_rows;
+                    while ($fila1 = $resultado->fetch_object()) {
+                        echo "Tienda: $fila1->nombre : $fila1->unidades unidades <br>";
                     }
                 } catch (Exception $exc) {
                     echo $exc->getTraceAsString();
