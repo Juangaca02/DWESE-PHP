@@ -15,7 +15,7 @@
             if (preg_match('/  \/  \/  /', $_POST['dni']) === 0) {
                 $dni2 = false;
             }
-            if (preg_match('/\d{2}\/\d{2}\/\d{4}/', $_POST['nombre']) === 0) {
+            if (preg_match('/\d{2}\/\d{2}\/\d{4}/', $_POST['fechaNaci']) === 0) {
                 list($day, $month, $year) = explode("/", $_POST['fechaNaci']);
                 if (checkdate($month, $day, $year) == false) {
                     $mail = false;
@@ -56,11 +56,11 @@
                 }
                 ?><br>
                 Edad: <input type="number" name="edad">
-<?php
-if (isset($_POST['edad']) && $edad2 == false) {
-    echo "Edad Incorecto";
-}
-?><br>
+                <?php
+                if (isset($_POST['edad']) && $edad2 == false) {
+                    echo "Edad Incorecto";
+                }
+                ?><br>
                 <input type="submit" name="boton" value="Aceptar"><br>
             </div>
         </form>
