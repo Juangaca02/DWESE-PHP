@@ -6,8 +6,9 @@
 
 <body>
     <?php
+    require_once "funciones.php";
     try {
-        $conex = new PDO("mysql:host=localhost;dbname=autobuses;charset=utf8mb4", "dwes", "abc123.");
+        $conex = crearConexion();
         $result = $conex->query("Select * from viajes");
     } catch (Exception $ex) {
         die($ex->getMessage());
