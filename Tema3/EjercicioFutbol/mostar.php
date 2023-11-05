@@ -1,4 +1,3 @@
-<a href="index.php">Menu</a>
 <h1>Mostrar</h1>
 <?php
 require_once "funciones.php";
@@ -15,3 +14,4 @@ try {
 $conex->close();
 
 ?>
+<a href="index.php">Menu</a>

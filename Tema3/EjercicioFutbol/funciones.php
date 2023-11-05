@@ -2,7 +2,7 @@
 function crearConexion()
 {
     try {
-        $conex = new mysqli('localhost', 'dwes', 'abc123.', 'jugadores');
+        $conex = new mysqli('localhost', 'dwes', 'abc123.', 'futbol');
         $conex->set_charset('utf8mb4');
         return $conex;
     } catch (Exception $ex) {
@@ -12,14 +12,15 @@ function crearConexion()
 
 function mostrarJugador($fila)
 {
-    echo "dni jugador $fila->dni<br>";
-    echo "nombre jugador $fila->nombre<br>";
-    echo "dorsal jugador $fila->dorsal<br>";
-    echo "posicion jugador $fila->posicion<br>";
-    echo "equipo jugador $fila->equipo<br>";
-    echo "goles jugador $fila->goles<br>";
-    echo "============================================================================================<br>";
-
+    echo "<table border='1'>";
+    echo "<tr>";
+    echo "<td>NombreJugador:</td><td>DNI:</td><td>Dorsal:</td><td>Posicion:</td><td>Equipo:</td><td>NumeroGoles:</td>";
+    echo "</tr>";
+    echo "<tr>";
+    echo "<td>$fila->NombreJugador</td> <td>$fila->DNI</td><td>$fila->Dorsal</td><td>$fila->Posición</td><td>$fila->Equipo</td><td>$fila->NumeroGoles</td>";
+    echo "</tr>";
+    echo "</table>";
+    echo "<br>";
 }
 
 function crearSelectPosicion($posicionesFormulario)
