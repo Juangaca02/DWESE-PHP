@@ -32,7 +32,6 @@
                 }
                 ?>
             </select>
-            <input type="hidden" name="codfa" value="$reg->cod">
             <input type="submit" name="mostrar" value="Mostrar Stock">
         </form>
     </div>
@@ -58,9 +57,15 @@
                 <?php
             }
             ?>
-            <?php
-    } ?>
-    </div>
+        </div>
+        <?php
+    }
+    if (isset($_POST['moficicar'])) {
+        ?>
+
+        <?php
+    }
+    ?>
 </body>
 
 </html>
