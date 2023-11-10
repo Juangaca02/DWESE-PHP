@@ -48,10 +48,12 @@
             <?php
             while ($row = $result->fetch(PDO::FETCH_OBJ)) {
                 ?>
-                <form action="" method="POST">
+                <form action="editar.php" method="POST">
                     <?php
                     echo "Producto: $row->nombre_corto , Precio $row->PVP €";
                     echo "<input type='submit' name='modificar' value='Modificar'>";
+                    echo "<input type='hidden' name='cod' value='$row->cod'>";
+
                     ?>
                 </form>
                 <?php
