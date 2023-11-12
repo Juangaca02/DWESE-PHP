@@ -31,16 +31,22 @@
     ?>
     <h1>Añadir Autobus</h1>
     <form action="" method="POST">
-
-        Matricula: <input type="text" name="matricula" value="<?php if (isset($_POST['matricula']))
-            echo $_POST['matricula'] ?>">
+        Matricula: <input type="text" name="matricula" value="<?php
+        if (isset($_POST['matricula'])) {
+            echo $_POST['matricula'];
+        } ?>">
         <?php if (isset($_POST['matricula']) && $matri == false) {
             echo "Matricula Incorecto";
         }
         ?><br>
-        Marca: <input type="text" name="marca" value=""><br>
-        Nº Plazas: <input type="text" name="plazas" value=""><br>
-        </select>
+        Marca: <input type="text" name="marca" value="<?php
+        if (isset($_POST['marca'])) {
+            echo $_POST['marca'];
+        } ?>"><br>
+        Nº Plazas: <input type="text" name="plazas" value="<?php
+        if (isset($_POST['plazas'])) {
+            echo $_POST['plazas'];
+        } ?>">"><br>
         <input type="submit" name="añadir" value="Añadir"><br><br>
         <a href="index.php">Volver al Menu</a>
     </form>

@@ -12,6 +12,6 @@ foreach ($a as $ind => $valor) {
         echo "$valor<br>";
     }
 }
-echo "Media de los nunmeros pares es ".$sumaPares/(count($a)/2)."<br>";
-echo "Media de los nunmeros pares es ".$sumaPares/$b;
+echo "Media de los nunmeros pares es " . $sumaPares / (count($a) / 2) . "<br>";
+echo "Media de los nunmeros pares es " . $sumaPares / $b;
 ?>
