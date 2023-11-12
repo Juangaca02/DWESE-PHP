@@ -22,7 +22,7 @@
         echo "Borrado realizado correctamente";
         $conex->close();
     }
-    ?>
+    ?><br><a href="index.php">Menu</a>
 </body>
 
 </html>

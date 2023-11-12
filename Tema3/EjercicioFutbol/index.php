@@ -10,8 +10,8 @@
         <ul>
             <li><a href="introducir.php">Introducir</a></li>
             <li><a href="mostar.php">Mostrar los datos</a></li>
-            <li><a href="">Buscar</a></li>
-            <li><a href="">Modificar</a></li>
+            <li><a href="buscar.php">Buscar</a></li>
+            <li><a href="modificar.php">Modificar</a></li>
             <li><a href="borrar.php">Borrar</a></li>
         </ul>
     </form>

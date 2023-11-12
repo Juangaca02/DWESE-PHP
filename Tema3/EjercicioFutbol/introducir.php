@@ -14,7 +14,7 @@
             $nom = false;
             $errores = false;
         }
-        if (preg_match('/^\d{7}[A-Z]{1}$/', $_POST['dni']) === 0) {
+        if (preg_match('/^\d{8}[A-Z]{1}$/', $_POST['dni']) === 0) {
             $dni2 = false;
             $errores = false;
         }
@@ -99,7 +99,7 @@
         crearSelectPosicion($crearSelec);
         ?>
         <?php if (isset($_POST['insertar']) && $posición2 == false)
-            echo "Posicion Incorecto,no puede estar vacia"; ?>
+            echo "Posicion Incorecta, no puede estar vacia"; ?>
         <br>
 
         Equipo: <input type="text" name="equipo" value="<?php if (isset($_POST['insertar']))

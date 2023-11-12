@@ -1,6 +1,7 @@
 <a href="index.php">Menu</a>
 <h1>Buscar</h1>
 <form action="" method="post">
+    Buscar por:
     <select name="parametro">
         <option value="dni" <?php if (isset($_POST["enviar"]) && $_POST["parametro"] == "dni")
             echo "selected" ?>>DNI

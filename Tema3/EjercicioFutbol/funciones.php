@@ -13,12 +13,8 @@ function crearConexion()
 function mostrarJugador($fila)
 {
     echo "<table border='1'>";
-    echo "<tr>";
-    echo "<td>NombreJugador:</td><td>DNI:</td><td>Dorsal:</td><td>Posicion:</td><td>Equipo:</td><td>NumeroGoles:</td>";
-    echo "</tr>";
-    echo "<tr>";
-    echo "<td>$fila->NombreJugador</td> <td>$fila->DNI</td><td>$fila->Dorsal</td><td>$fila->Posición</td><td>$fila->Equipo</td><td>$fila->NumeroGoles</td>";
-    echo "</tr>";
+    echo "<tr><td>NombreJugador:</td><td>DNI:</td><td>Dorsal:</td><td>Posicion:</td><td>Equipo:</td><td>NumeroGoles:</td></tr>";
+    echo "<tr><td>$fila->NombreJugador</td> <td>$fila->DNI</td><td>$fila->Dorsal</td><td>$fila->Posición</td><td>$fila->Equipo</td><td>$fila->NumeroGoles</td></tr>";
     echo "</table>";
     echo "<br>";
 }
