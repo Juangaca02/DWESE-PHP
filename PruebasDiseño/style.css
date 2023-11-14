@@ -1,0 +1,5 @@
+input {
+  border: none;
+  border-bottom: 1px solid black; /* Puedes ajustar el color y el estilo según tus preferencias */
+  outline: none; /* Esto quita el contorno de enfoque en algunos navegadores */
+}
