@@ -6,77 +6,56 @@
 
 <body>
     <?php
-    require_once "funciones.php";
-    try {
-        $conex = crearConexion();
-        $result = $conex->query("Select * from autos");
-    } catch (Exception $ex) {
-        die($ex->getMessage());
-    }
-    $matri = $errores = true;
-    if (isset($_POST['añadir'])) {
-
-        if (preg_match('/^\d{3}[a-zA-Z]{3}$/', $_POST['matricula']) === 0) {
-            $matri = false;
-            $errores = false;
-        }
-
+    require_once("funciones.php");
+    $conex = crearConexion();
+    if (isset($_POST['enviar'])) {
         try {
-            $result = $conex->exec("SELECT matricula from autos");
-        } catch (Exception $ex) {
-            die($ex->getMessage());
-        }
-
-        if (!$errores == false) {
-            //echo var_dump($_POST);
-            $conex = crearConexion();
-
-            try {
-                $result = $conex->exec("INSERT INTO autos VALUES ('$_POST[matricula]','$_POST[marca]','$_POST[plazas]')");
-            } catch (Exception $ex) {
-                die($ex->getMessage());
+            $result = $conex->query("SELECT * from autos where matricula = '$_POST[matricula]'");
+            $row = $result->fetchObject();
+            if (($row->Num_plazas >= $_POST["plazas"])) {
+                $conex->exec("INSERT into viajes values ('$_POST[date]', '$_POST[matricula]', '$_POST[origen]', '$_POST[destino]', $_POST[plazas])");
+                echo "Viaje insertado";
             }
-            echo "Registro insertado correctamente";
+        } catch (PDOException $e) {
+            die($e->getMessage());
         }
     }
     ?>
 
-
-
     <h1>Añadir Autobus</h1>
-    <form action="" method="POST">
-        Fecha: <input type="date" name="fecha"><br>
-        Matricula: <select name="matriculaName">
-            <?php
-            while ($reg = $result->fetch(PDO::FETCH_OBJ)) {
-                echo '<option value = "' . $reg->matricula . '"';
-                if (isset($_POST['añadir']) && $_POST['matriculaName'] == $reg->matricula) {
-                    echo ' selected';
-                }
-                echo '>' . $reg->Matricula . '</option>';
-            }
-            ?>
-        </select><br>
-        Origen: <input type="text" name="marca" value=""><br>
-        Destino: <input type="text" name="marca" value=""><br>
-        Nº Plazas Libres:
+    <form action="" method="post">
+        Fecha: <input type="date" name="date"><br>
         <?php
-        if (!isset($_POST['matriculaName'])) {
-            try {
-                $i = $conex->exec("SELECT Num_plazas from autos where 'Matricula' = '123QWE';");
-                ?><input type="number" name="marca" value="<?php $i ?>"><br>
-                <?php
-            } catch (Exception $ex) {
-                die($ex->getMessage());
+        echo "<br>Matrícula";
+        try {
+            $res = $conex->query("SELECT matricula from autos");
+            echo "<select name='matricula'>";
+            while ($row = $res->fetchObject()) {
+                echo "<option value='$row->matricula'>$row->matricula</option>";
+            }
+            echo "</select>";
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+        echo "<br><br>";
+        ?> Origen:<input type="text" name="origen">
+        <?php
+        echo "<br><br>";
+        ?> Destino:<input type="text" name="destino">
+        <?php
+        echo "<br><br>";
+        ?> Nº de plazas<input type="number" name="plazas">
+        <?php if (isset($_POST['enviar'])) {
+            $result = $conex->query("SELECT num_plazas from autos where matricula = '$_POST[matricula]'");
+            $row = $result->fetchObject();
+            if (isset($_POST['enviar']) && !($row->num_plazas >= $_POST['plazas'])) {
+                echo "El numero de plazas es mayor al posible";
             }
         }
         ?>
-        </select>
-        <input type="submit" name="añadir" value="Añadir"><br><br>
-        <a href="index.php">Volver al Menu</a>
+        <input type="submit" name="enviar" value="enviar"><br>
+        <a href="index.php">Volver</a>
     </form>
-    <?php
-    ?>
 </body>
 
 </html>
