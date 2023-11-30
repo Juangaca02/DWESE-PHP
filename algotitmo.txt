@@ -1,0 +1,8 @@
+IF (enviado){
+    valida
+}
+IF (enviado y no hay errores) {
+    procesa
+} else{
+    muestra Formulario (Con Errores /Sin errores)
+}

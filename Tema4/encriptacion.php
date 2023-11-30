@@ -20,9 +20,14 @@ if (md5($pass_usu) == $hash_md5) {
 
 echo "<br>Comprobacion<br>";
 if (password_verify($pass_usu, $hash_password)) {
-    echo "Contraseña Correcto";
+    echo "Contraseña Correcto <br>";
 } else {
-    echo "Contraseña Incorrecto";
+    echo "Contraseña Incorrecto <br>";
 }
+
+$pass3 = "1234";
+$hash_md5 = md5($pass3);
+
+echo $hash_md5 . "<br>";
 
 ?>
