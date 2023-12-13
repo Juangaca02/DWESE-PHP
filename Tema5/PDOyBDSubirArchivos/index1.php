@@ -13,8 +13,10 @@
 
 <body>
     <form action="" method="post" enctype="multipart/form-data">
+        Nombre: <input type="text" name="nombre">
         Selecionar Fichero: <input type="file" name="foto"><br><br>
         <input type="submit" value="Subir Fichero" name="subir">
+        <input type="submit" name="mostrar" value="Mostrar">
     </form>
 
 </body>
@@ -32,51 +34,31 @@ if (isset($_POST['subir'])) {
         $fich = time() . "-" . $_FILES['foto']['name'];
         $ruta = "fotos/" . $fich;
         move_uploaded_file($_FILES['foto']['tmp_name'], $ruta);
+        try {
+            $conex = new mysqli('localhost', 'dwes', 'abc123.', 'ficheros');
+            $conex->query("INSERT into fotos (nombre, ruta) values('$_POST[nombre]','$ruta')");
+        } catch (Exception $ex) {
+            die($ex->getTraceAsString());
+        }
     } else {
         echo "Error al subir el ficehro";
     }
 }
 
-if (isset($_POST['buscar'])) {
-    ?>
-    <form action="" method="post">
-        Codigo del Producto: <input type="text" name="cod"><br>
-        <input type="submit" name="buscarcod" value="Buscar">
-    </form>
-    <?php
-}
-
-if (isset($_POST['buscarcod'])) {
-    $p = ProductoController::buscarProductos($_POST["cod"]);
-    if ($p === false) {
-        echo "Error en la base de datos";
-    } elseif ($p) {
-        echo $p;
-    } else {
-        echo "No existe el producto";
-    }
-}
-
-
 if (isset($_POST['mostrar'])) {
-    $products = ProductoController::recuperaTodo();
-    if ($products === false) {
-        echo "Error en la base de datos";
-    } elseif ($products) {
-        ?>
-        <table border="1">
-            <tr>
-                <?php
-                foreach ($products as $p) {
-                    echo "<td>$p->codigo</td>";
-                    echo "<td>$p->nombre</td>";
-                    echo "<td>$p->precio</td></tr>";
-                }
-                ?>
-        </table>
-        <?php
-    } else {
-        echo "No hay producto en la base de datos";
+    try {
+        $conex = new mysqli('localhost', 'dwes', 'abc123.', 'ficheros');
+        $result = $conex->query("SELECT * from fotos");
+        if ($result->num_rows) {
+            while ($reg = $result->fetch_object()) {
+                //echo "<a href='$reg->ruta' target='_blank'><img src='$reg->ruta' width='50px' height='50px'></a>";
+                echo "<a href='mostrar.php?ruta=$reg->ruta'><img src='$reg->ruta' width='50px' height='50px'></a>";
+            }
+        } else {
+            echo "No hay fotos en la BD";
+        }
+    } catch (\Throwable $th) {
+        //throw $th;
     }
 }
 ?>

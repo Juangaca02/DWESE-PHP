@@ -28,6 +28,12 @@ if (password_verify($pass_usu, $hash_password)) {
 $pass3 = "1234";
 $hash_md5 = md5($pass3);
 
+echo $hash_md5 . "<br><br><br><br>";
+
+$pass = "antonio";
+$hash_md5 = md5($pass);
 echo $hash_md5 . "<br>";
+
+
 
 ?>
