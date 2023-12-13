@@ -18,7 +18,7 @@ if (md5($pass_usu) == $hash_md5) {
 }
 
 
-echo "<br>Comprobacion<br>";
+echo "<br>Comprobacion sedrsedr<br>";
 if (password_verify($pass_usu, $hash_password)) {
     echo "Contraseña Correcto <br>";
 } else {
@@ -31,8 +31,8 @@ $hash_md5 = md5($pass3);
 echo $hash_md5 . "<br><br><br><br>";
 
 $pass = "antonio";
-$hash_md5 = md5($pass);
-echo $hash_md5 . "<br>";
+$hash_password = password_hash($pass, PASSWORD_DEFAULT);
+echo $hash_password . "<br>";
 
 
 

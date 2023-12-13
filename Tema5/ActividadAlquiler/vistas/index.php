@@ -10,8 +10,12 @@ require_once '../clases/Cliente.php';
 <nav>
     <div>
         <?php
+        session_start();
         if (isset($_SESSION['cliente'])) {
-            echo "Hola Buenas tardes " . $_SESSION['cliente'];
+            echo "Hola Buenas tardes " . $_SESSION['cliente']->Nombre;
+
+        } else {
+            echo "POPO";
         }
 
         if (isset($_POST['login'])) {
