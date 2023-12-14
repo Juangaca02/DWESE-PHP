@@ -30,7 +30,7 @@ $hash_md5 = md5($pass3);
 
 echo $hash_md5 . "<br><br><br><br>";
 
-$pass = "antonio";
+$pass = "Admin";
 $hash_password = password_hash($pass, PASSWORD_DEFAULT);
 echo $hash_password . "<br>";
 

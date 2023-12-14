@@ -6,16 +6,22 @@
 <?php
 require_once '../controladores/JuegoContrloler.php';
 require_once '../clases/Cliente.php';
+
+session_start();
 ?>
 <nav>
     <div>
         <?php
-        session_start();
         if (isset($_SESSION['cliente'])) {
-            echo "Hola Buenas tardes " . $_SESSION['cliente']->Nombre;
-
+            $botonesAdmin = false;
+            if (($_SESSION['cliente']->tipo) == 'cliente') {
+                echo "Hola " . $_SESSION['cliente']->tipo . " " . $_SESSION['cliente']->nombre;
+            } else {
+                echo "Hola " . $_SESSION['cliente']->tipo . " " . $_SESSION['cliente']->nombre;
+                $botonesAdmin = true;
+            }
         } else {
-            echo "POPO";
+            echo "No has devuelto Usuario";
         }
 
         if (isset($_POST['login'])) {
@@ -48,6 +54,15 @@ require_once '../clases/Cliente.php';
                 echo "<td>$juego->nombre_juego</td>";
             }
             echo "</tr>";
+            if ($botonesAdmin) {
+                echo "<tr>";
+                foreach ($juegos as $juego) {
+                    echo "<td><form action='' method='post'><input type='submit' value='Modificar' name='Modificar'></form>
+                    <input type='submit' value='Borrar' name='Borrar'></td>";
+                }
+                echo "</tr>";
+            }
+
         }
         ?>
     </table>

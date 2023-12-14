@@ -8,10 +8,10 @@
 
     if (isset($_POST['register'])) {
         $claveHash = password_hash($_POST['clave'], PASSWORD_DEFAULT);
-        $cliente = new Cliente($_POST['dni'], $_POST['nombre'], $_POST['apellido'], $_POST['direccion'], $_POST['localidad'], $claveHash, "Cliente");
+        $cliente = new Cliente($_POST['dni'], $_POST['nombre'], $_POST['apellido'], $_POST['direccion'], $_POST['localidad'], $claveHash, "cliente");
         if (ClienteControler::nuevoCLiente($cliente)) {
             session_start();
-            $_SESSION['cliente'];
+            $_SESSION['cliente'] = $cliente;
             header("Location:index.php");
         }
     }

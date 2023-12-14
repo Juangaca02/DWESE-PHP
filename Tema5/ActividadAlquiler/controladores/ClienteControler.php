@@ -14,12 +14,17 @@ class ClienteControler
                 if (password_verify($pass, $cliente->Clave)) {
                     return new Cliente($cliente->DNI, $cliente->Nombre, $cliente->Apellido,
                         $cliente->Direccion, $cliente->Localidad, $cliente->Clave, $cliente->Tipo);
+                } else {
+                    $cliente = null;
                 }
+            } else {
+                $cliente = null;
             }
         } catch (PDOException $ex) {
             echo "Fallo en el Comprobar CLiente";
+            $cliente = false;
         }
-
+        return $cliente;
     }
 
     public static function nuevoCLiente($cliente)
@@ -30,9 +35,12 @@ class ClienteControler
             $stmt->execute([$cliente->dni, $cliente->nombre, $cliente->apellido, $cliente->direccion, $cliente->localidad, $cliente->clave, $cliente->tipo]);
             if ($stmt->rowCount() > 0) {
                 return true;
+            } else {
+                return false;
             }
         } catch (PDOException $ex) {
             echo "Fallo en el insert Cliente";
+            return false;
         }
     }
 

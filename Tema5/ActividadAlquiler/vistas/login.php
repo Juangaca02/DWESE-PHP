@@ -3,17 +3,17 @@
     <?php
     require_once '../controladores/Connection.php';
     require_once '../clases/Cliente.php';
+    require_once '../controladores/ClienteControler.php';
     if (isset($_POST['volver'])) {
         header("Location:index.php");
     }
     if (isset($_POST['login'])) {
-        session_name("cliente");
         session_start();
         //$hashPass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-    
+        ClienteControler::comprobarCliente($_POST['dni'], $_POST['pass']);
         try {
             $conex = new conexion();
-            $result = $conex->query("SELECT * from cliente where DNI= '$_POST[dni]'");
+            $result = $conex->query("SELECT * from cliente where DNI like '$_POST[dni]';");
             $datosUsuario = null;
             while ($cliente = $result->fetchObject()) {
                 if (password_verify($_POST['pass'], $cliente->Clave)) {

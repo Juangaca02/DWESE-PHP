@@ -9,6 +9,14 @@ class conexion extends PDO
     {
         return parent::__construct($this->dns, $this->username, $this->password, $options);
     }
+    public function __get($name)
+    {
+        return $this->$name;
+    }
+    public function __set($name, $value)
+    {
+        $this->$name = $value;
+    }
 }
 
 ?>
