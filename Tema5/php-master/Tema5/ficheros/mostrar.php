@@ -1,0 +1,1 @@
+<img src="<?php echo "$_GET[ruta]"; ?>" width="500px" height="500px" />

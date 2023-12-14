@@ -20,8 +20,6 @@ session_start();
                 echo "Hola " . $_SESSION['cliente']->tipo . " " . $_SESSION['cliente']->nombre;
                 $botonesAdmin = true;
             }
-        } else {
-            echo "No has devuelto Usuario";
         }
 
         if (isset($_POST['login'])) {
@@ -54,13 +52,15 @@ session_start();
                 echo "<td>$juego->nombre_juego</td>";
             }
             echo "</tr>";
-            if ($botonesAdmin) {
-                echo "<tr>";
-                foreach ($juegos as $juego) {
-                    echo "<td><form action='' method='post'><input type='submit' value='Modificar' name='Modificar'></form>
+            if (isset($_SESSION['cliente'])) {
+                if ($botonesAdmin) {
+                    echo "<tr>";
+                    foreach ($juegos as $juego) {
+                        echo "<td><input type='submit' value='Modificar' name='Modificar'>
                     <input type='submit' value='Borrar' name='Borrar'></td>";
+                    }
+                    echo "</tr>";
                 }
-                echo "</tr>";
             }
 
         }
