@@ -9,10 +9,13 @@
             if (vehiculoController::nuevoVehiculo($coche)) {
                 session_start();
                 $_SESSION['vehiculo'] = $coche;
-                header("Location:index.php");
+                header("Location:index1.php");
             }
-            header("Location:index.php");
+            header("Location:index1.php");
         }
+    }
+    if (isset($_POST["volver"])) {
+        header("Location:index1.php");
     }
     ?>
     <h1>Vehiculo</h1>

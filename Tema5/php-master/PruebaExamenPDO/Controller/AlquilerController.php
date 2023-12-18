@@ -34,7 +34,7 @@ class AlquilerController
     {
         try {
             $conn = new Conexion();
-            $resultado = $conn->query("select * from alquiler a join juegos j on a.Cod_juego = j.Codigo where a.DNI_cliente='$dni';");
+            $resultado = $conn->query("SELECT * from alquiler a join juegos j on a.Cod_juego = j.Codigo where a.DNI_cliente='$dni';");
             $conn = null;
             $tabla = null;
             while ($fila = $resultado->fetchObject()) {
