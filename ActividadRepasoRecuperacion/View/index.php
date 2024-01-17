@@ -9,23 +9,28 @@
 <?php
 if (isset($_POST["entrar"])) {
     require_once '../Controller/ControllerUsuarios.php';
-    $usuario = ControllerUsuarios::getUsuariosByDni($_POST["dni"]);
-    if ($usuario === false)
-        echo "Error en la base de datos";
-    if ($usuario === null)
-        echo "El usuario no existe en la base de datos";
-    if ($usuario) {
-        $usuario = ControllerUsuarios::getUsuariosByDniAndPass($_POST["dni"], md5($$_POST["clave"]));
-        if ($usuario === false)
-            echo "Error en la base de datos";
-        if ($usuario === null) {
-            $usuario = ControllerUsuarios::updateIntentos($_POST["dni"]);
-            echo "Clave incorrecta";
+    if ((ControllerUsuarios::getBloqueado($_POST["dni"])) == false) {
+        echo "Cuenta bloqueada<br>Solicite su desbloqueamiento al Admin";
+    } else {
+        $usuarioDni = ControllerUsuarios::getUsuariosByDni($_POST["dni"]);
+        if ($usuarioDni === false)
+            echo "Error en la base de datos1";
+        if ($usuarioDni === null)
+            echo "El usuario no existe en la base de datos";
+        if ($usuarioDni) {
+            $usuario = ControllerUsuarios::getUsuariosByDniAndPass($_POST["dni"], md5($_POST["clave"]));
+            if ($usuario === false)
+                echo "Error en la base de datos2";
+            if ($usuario === null) {
+                ControllerUsuarios::updateIntentos($_POST["dni"]);
+            }
+            if ($usuario) {
+                ControllerUsuarios::updateIntentosCorrecto($_POST["dni"]);
+                session_start();
+                $_SESSION["usuario"] = $usuario;
+                header("Location:inicio_cliente.php");
+            }
         }
-
-
-
-
     }
 }
 ?>
