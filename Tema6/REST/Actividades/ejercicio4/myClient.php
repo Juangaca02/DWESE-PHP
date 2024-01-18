@@ -8,17 +8,16 @@
 <body>
     <form action="" method="POST">
         <label>Cuantas Cartas Desas optener?</label>
-        <input type="number" name="numCarta" value="1" min="0">
-        <input type="submit" name="Consultar" value="Consultar">
+        <input type="number" name="numCartas" value="1" required>
+        <input type="submit" name="enviar" value="Enviar">
     </form>
 </body>
 <?php
-if (isset($_POST['Consultar'])) {
-    if (isset($_POST['numCarta'])) {
-        $datos = file_get_contents("http://localhost/DWESE-PHP/Tema6/REST/Actividades/ejercicio4/myserver.php?conversion=" . $_POST['numCarta']);
-        echo $datos;
-        $productos = json_decode($datos);
-        echo $productos;
+if (isset($_POST['enviar'])) {
+    $datos = file_get_contents("http://localhost/DWESE-PHP/Tema6/REST/Actividades/ejercicio4/myserver.php?numCartas=$_POST[numCartas]");
+    $productos = json_decode($datos);
+    foreach ($productos as $value) {
+        echo $value . "<br>";
     }
 }
 ?>
