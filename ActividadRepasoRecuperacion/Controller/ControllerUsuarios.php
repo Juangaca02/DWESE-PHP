@@ -22,6 +22,32 @@ class ControllerUsuarios
         return $usuario;
     }
 
+    public static function usuarioForCuentas($dni)
+    {
+        try {
+            $conn = new conexion();
+            $stmt = $conn->query("SELECT * from usuarios where DNI = '$dni'");
+            //$resultado = $stmt->get_result();
+            if ($fila = $stmt->fetch_object()) {
+                $usuario = new Usuario(
+                    $fila->Nombre,
+                    $fila->Direccion,
+                    $fila->Telefono,
+                    $fila->DNI,
+                    $fila->clave,
+                    $fila->intentos,
+                    $fila->bloqueado
+                );
+            } else {
+                $usuario = null;
+            }
+        } catch (Exception $ex) {
+            $usuario = false;
+        }
+        $conn->close();
+        return $usuario;
+    }
+
     public static function getUsuariosByDniAndPass($dni, $pass)
     {
         try {
@@ -104,16 +130,5 @@ class ControllerUsuarios
             return false;
         }
     }
-
-
-
 }
-
-
-
-
-
-
-
-
 ?>

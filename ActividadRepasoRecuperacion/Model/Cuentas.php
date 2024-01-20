@@ -4,13 +4,13 @@ class Cuentas
 {
     protected $iban;
     protected $saldo;
-    protected $dni_cuentas;
+    protected $dni_cuenta;
 
-    public function __construct($iban, $saldo, $dni_cuentas)
+    public function __construct($iban, $saldo, $dni_cuenta)
     {
         $this->iban = $iban;
         $this->saldo = $saldo;
-        $this->dni_cuentas = $dni_cuentas;
+        $this->dni_cuenta = $dni_cuenta;
     }
     public function __get($name)
     {
