@@ -7,12 +7,18 @@
     <title>Login</title>
 </head>
 <?php
+
+// if (!isset($_SESSION['usuario'])) {
+//     header('Location:inicio_cliente.php');
+// }
+
+
 if (isset($_POST["entrar"])) {
     require_once '../Controller/ControllerUsuarios.php';
     if ((ControllerUsuarios::getBloqueado($_POST["dni"])) == false) {
         echo "Cuenta bloqueada<br>Solicite su desbloqueamiento al Admin";
     } else {
-        $usuarioDni = ControllerUsuarios::getUsuariosByDni($_POST["dni"]);
+        $usuarioDni = ControllerUsuarios::usuarioForCuentas($_POST["dni"]);
         if ($usuarioDni === false)
             echo "Error en la base de datos1";
         if ($usuarioDni === null)

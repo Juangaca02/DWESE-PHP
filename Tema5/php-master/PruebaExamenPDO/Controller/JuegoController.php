@@ -115,7 +115,7 @@ class JuegoController
     {
         try {
             $conn = new Conexion();
-            $conn->exec("delete from juegos where Codigo='$cod';");
+            $conn->exec("DELETE from juegos where Codigo='$cod';");
             $conn = null;
             return true;
         } catch (\Exception $ex) {

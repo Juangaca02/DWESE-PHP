@@ -77,7 +77,7 @@ if (isset($_POST["transferencia"])) {
                 // Iterar sobre las cuentas y mostrar la información
                 // Mostrar el historial
                 echo "Historial de la cuenta $ibanSeleccionado:<br>";
-                echo '<table border="1"><tr><th>Origen</th> <th>Destino</th> <th>Fecha</th><th>Cantidad</th></tr>';
+                echo '<table border="1"><tr><th>Origen</th><th>Destino</th><th>Fecha</th><th>Cantidad</th></tr>';
                 foreach ($historial as $registro) {
                     ?>
                     <tr>

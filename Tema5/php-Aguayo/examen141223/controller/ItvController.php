@@ -12,15 +12,23 @@
  */
 require_once '../controller/Conexion.php';
 require_once '../model/Itv.php';
-class ItvController {
+class ItvController
+{
     //el listado de las itv por provincias
-    public static function listadoItvProvincia($provincnia) {
+    public static function listadoItvProvincia($provincnia)
+    {
         $itvs = null;
-        try{
+        try {
             $conex = new Conexion();
-            $stmt = $conex->query("select * from itvs where provincia = '$provincnia'");
-            while ($result = $stmt->fetchObject()){
-                $itvs[] = new Itv($result->id, $result->provincia, $result->localidad, $result->direccion, $result->telefono);
+            $stmt = $conex->query("SELECT * from itvs where provincia = '$provincnia'");
+            while ($result = $stmt->fetchObject()) {
+                $itvs[] = new Itv(
+                    $result->id,
+                    $result->provincia,
+                    $result->localidad,
+                    $result->direccion,
+                    $result->telefono
+                );
             }
             $stmt = null;
             $conex = null;
@@ -29,15 +37,22 @@ class ItvController {
         }
         return $itvs;
     }
-    
+
     //el listado de las itvs por su id
-    public static function getItvById($id) {
+    public static function getItvById($id)
+    {
         $itv = null;
-        try{
+        try {
             $conex = new Conexion();
-            $stmt = $conex->query("select * from itvs where id = '$id'");
-            if ($result = $stmt->fetchObject()){
-                $itv = new Itv($result->id, $result->provincia, $result->localidad, $result->direccion, $result->telefono);
+            $stmt = $conex->query("SELECT * from itvs where id = '$id'");
+            if ($result = $stmt->fetchObject()) {
+                $itv = new Itv(
+                    $result->id,
+                    $result->provincia,
+                    $result->localidad,
+                    $result->direccion,
+                    $result->telefono
+                );
             }
             $stmt = null;
             $conex = null;
@@ -46,15 +61,22 @@ class ItvController {
         }
         return $itv;
     }
-    
+
     //me equivoqué y realize este metodo por que creia que servia de algo
-    public static function getAllItv(){
+    public static function getAllItv()
+    {
         $itvs = null;
-        try{
+        try {
             $conex = new Conexion();
-            $stmt = $conex->query("select * from itvs");
-            while ($result = $stmt->fetchObject()){
-                $itvs[] = new Itv($result->id, $result->provincia, $result->localidad, $result->direccion, $result->telefono);
+            $stmt = $conex->query("SELECT * from itvs");
+            while ($result = $stmt->fetchObject()) {
+                $itvs[] = new Itv(
+                    $result->id,
+                    $result->provincia,
+                    $result->localidad,
+                    $result->direccion,
+                    $result->telefono
+                );
             }
             $stmt = null;
             $conex = null;

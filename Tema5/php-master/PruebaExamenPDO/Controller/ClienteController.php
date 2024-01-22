@@ -9,7 +9,7 @@ class ClienteController
         try {
             $conn = new Conexion();
             //$resultado = $conn->query("select * from cliente where DNI like '$dni';");
-            $stmt = $conn->prepare("select * from cliente where DNI like ?;");
+            $stmt = $conn->prepare("SELECT * from cliente where DNI like ?;");
             $stmt->execute([$dni]);
             if ($fila = $stmt->fetchObject()) {
                 if (password_verify($clave, $fila->Clave)) {
@@ -40,7 +40,7 @@ class ClienteController
     {
         try {
             $conn = new Conexion();
-            $resultado = $conn->exec("insert into cliente values('$cliente->dni', '$cliente->nombre', '$cliente->apellidos', '$cliente->direccion', '$cliente->localidad', '$cliente->clave', '$cliente->tipo')");
+            $resultado = $conn->exec("INSERT into cliente values('$cliente->dni', '$cliente->nombre', '$cliente->apellidos', '$cliente->direccion', '$cliente->localidad', '$cliente->clave', '$cliente->tipo')");
             $conn = null;
             if ($resultado) {
                 return true;

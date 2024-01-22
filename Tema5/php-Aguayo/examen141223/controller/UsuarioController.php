@@ -12,19 +12,27 @@
  */
 require_once '../controller/Conexion.php';
 require_once '../model/Usuario.php';
-class UsuarioController {
-    
+class UsuarioController
+{
+
     //comprobamos que el usuario existe
-    public static function esUsuario($user, $pass) {
+    public static function esUsuario($user, $pass)
+    {
         $user1 = null;
-        try{
+        try {
             $conex = new Conexion();
-            $stmt  = $conex->prepare("select * from usuario where user = ?");
+            $stmt = $conex->prepare("SELECT * from usuario where user = ?");
             $stmt->execute([$user]);
-            if($result = $stmt->fetchObject()){
+            if ($result = $stmt->fetchObject()) {
                 //verificamos la contraseña
-                if(password_verify($pass, $result->pass)){
-                    $user1 = new Usuario($result->provincia, $result->nombre, $result->telefono, $result->user, $result->pass);
+                if (password_verify($pass, $result->pass)) {
+                    $user1 = new Usuario(
+                        $result->provincia,
+                        $result->nombre,
+                        $result->telefono,
+                        $result->user,
+                        $result->pass
+                    );
                 }
             }
             $stmt = null;

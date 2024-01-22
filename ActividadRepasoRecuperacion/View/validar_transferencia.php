@@ -22,13 +22,17 @@ if (isset($_POST["cerrarSession"])) {
 
 <body>
     <?php
+    if (isset($_POST['confirmar'])) {
+        ControllerCuentas::doTransferencia($_POST['saldoPosterior'], $_POST['cantidadTrans'], $_POST['comisionTrans'], $_POST['origenTrans'], $_POST['destinoTrans']);
+        header('Location:inicio_cliente.php');
+    }
     $comision = $_POST['cantidad'] * 0.01;
-    //$cantidadAQuitar = $_POST['saldo'] - $comision;
     $SaldoMasComision = $_POST['cantidad'] + $comision;
     $saldoPosterior = $_POST['saldo'] - $SaldoMasComision;
     $cantidadTrans = $_POST['cantidad'];
     $origenTrans = $_POST["iban"];
     $destinoTrans = $_POST["cuentas"];
+    $saldotrans = $_POST['saldo'];
     if ($saldoPosterior > $_POST['saldo']) {
         $negativo = true;
     } else {
@@ -38,15 +42,15 @@ if (isset($_POST["cerrarSession"])) {
     <form action="" method="post">
         <br>
         Origen:
-        <input type="text" name="origenTrans" disabled value="<?php echo $_POST['iban'] ?>"><br>
+        <input type="text" name="origenTrans" readonly value="<?php echo $origenTrans ?>"><br>
         Destino:
-        <input type="text" name="destinoTrans" disabled value="<?php echo $_POST['cuentas'] ?>"><br>
+        <input type="text" name="destinoTrans" readonly value="<?php echo $destinoTrans ?>"><br>
         Cantidad:
-        <input type="number" name="cantidadTrans" disabled value="<?php echo $_POST['cantidad'] ?>"><br>
+        <input type="number" name="cantidadTrans" readonly value="<?php echo $cantidadTrans ?>"><br>
         Comision:
-        <input type="number" name="comisionTrans" disabled value="<?php echo $comision ?>"><br>
+        <input type="number" name="comisionTrans" readonly value="<?php echo $comision ?>"><br>
         Saldo Anterior:
-        <input type="number" name="saldoAnterior" disabled value="<?php echo $_POST['saldo'] ?>"><br>
+        <input type="number" name="saldoAnterior" readonly value="<?php echo $saldotrans ?>"><br>
         <?php
         if ($negativo == true) {
             echo '<label style="color: red;">Saldo Posterior:</label> ';
@@ -54,10 +58,10 @@ if (isset($_POST["cerrarSession"])) {
             echo 'Saldo Posterior:';
         }
         ?>
-        <input type="number" name="saldoPosterior" disabled value="<?php echo $saldoPosterior ?>"><br>
+        <input type="number" name="saldoPosterior" readonly value="<?php echo $saldoPosterior ?>"><br>
         <?php
         if ($negativo == true) {
-            echo '<input type="submit" name="confirmar" disabled value="Confirmar">';
+            echo '<input type="submit" name="confirmar" readonly value="Confirmar">';
         } else {
             echo '<input type="submit" name="confirmar" value="Confirmar">';
         }
@@ -68,10 +72,7 @@ if (isset($_POST["cerrarSession"])) {
     <br>
     <form action="transferencias.php"><input type="submit" name="volver" value="Volver"></form>
     <?php
-    if (isset($_POST['confirmar'])) {
-        ControllerCuentas::doTransferencia($saldoPosterior, $cantidadTrans, $comision, $origenTrans, $destinoTrans);
-        //header('Location:inicio_cliente.php');
-    }
+
     ?>
 </body>
 

@@ -85,22 +85,20 @@ class ControllerCuentas
     {
 
         try {
-            $date = date("d/m/Y - H:i:s");
-            $horaActualMilisegundos = strtotime($date);
-            $conn = new Conexion();
-            $conn->query("UPDATE cuentas set saldo = saldo - $saldoPosterior WHERE iban='$iban_Origen'");
+            $date = time();
+            $conn = new conexion();
+            $conn->query("UPDATE cuentas set saldo = $saldoPosterior WHERE iban='$iban_Origen'");
             $conn->query("UPDATE cuentas set saldo = saldo + $cantidad WHERE iban='$iban_Destino'");
             $conn->query("UPDATE cuentas set saldo = saldo + $comision WHERE iban='ES2099999999999999999999'");
-            $conn->query("INSERT into transferencias values('$iban_Origen','$iban_Destino','$horaActualMilisegundos','$cantidad')");
+            $conn->query("INSERT into transferencias values('$iban_Origen','$iban_Destino','$date','$cantidad')");
             $conn->close();
-            print "Cuanta Bloqueada";
         } catch (\Exception $ex) {
-            return false;
+            echo 'Falo';
         }
     }
 
     //-------------------------------------------------------------------------------------------------------------------------------------
-
+/*
     public static function selectMatricula($matricula)
     {
         try {
@@ -153,6 +151,6 @@ foreach ($tabla as $fila) {
     else
         echo "<td>$fila[Fecha_devol]</td>";
     echo "</tr>";
-
+*/
 }
 
